@@ -1,0 +1,26 @@
+.votebox {
+    background-color: LightGray;
+    margin: 5px 15px;
+    padding: 5px 15px;
+    text-align: center;
+    border: 2px solid DarkGray;
+}
+.pollid{
+    font-family: "Courier New", Courier, monospace;
+}
+.question{
+    font-size:1.5em;
+    font-family: Impact, Charcoal, sans-serif;
+}
+.pollbutton{
+    width: 90px;
+    border-radius: 5px;
+    background-color: red;
+    font-family: Charcoal, sans-serif;
+    color: white;
+    text-decoration: none !important;
+    padding: 15px 25px;
+    margin: 5px;
+    text-align: center;
+    display: inline-block;
+}
