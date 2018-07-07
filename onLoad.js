@@ -80,7 +80,7 @@ $(document).ready(function () {
 });
 
 function voteInFavour(uid) {
-    contractInstance.voteInFavour(uid, {from: self}, function (err) {
+    contractInstance.voteInFavour(uid, {from: self , gas: 35000, gasPrice: web3.toWei(40,'gwei')}, function (err) {
         if(err){
             alert("You Have Already Voted For this Question");
         }
@@ -88,7 +88,7 @@ function voteInFavour(uid) {
 }
 
 function voteAgainst(uid) {
-    contractInstance.voteAgainst(uid, {from: self}, function (err) {
+    contractInstance.voteAgainst(uid, {from: self , gas: 35000, gasPrice: web3.toWei(40,'gwei')}, function (err) {
         if(err){
             if(err){
                 alert("You Have Already Voted For this Question");
@@ -106,7 +106,6 @@ function onClickNo(i) {
 }
 
 function addQuestion(val) {
-    contractInstance.addQuestion(val, {from: web3.eth.accounts[0]}, function (err, result) {
-        
+    contractInstance.addQuestion(val, {from: self , gas: 70000, gasPrice: web3.toWei(40,'gwei')}, function (err, result) {
     });
 }
