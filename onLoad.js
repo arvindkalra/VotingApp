@@ -1,4 +1,7 @@
 // let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+if(web3.eth.accounts.length === 0){
+    alert("Metamask Not Logged In");
+}
 let self = web3.eth.accounts[0];
 let abi = [{"constant":false,"inputs":[{"name":"_uid","type":"uint256"}],"name":"voteAgainst","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getNumberOfQuestions","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_uid","type":"uint256"}],"name":"deleteQuestion","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_uid","type":"uint256"}],"name":"getQuestionDetails","outputs":[{"name":"","type":"string"},{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_question","type":"string"}],"name":"addQuestion","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_uid","type":"uint256"}],"name":"voteInFavour","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":true,"stateMutability":"payable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"infavour","type":"uint256"},{"indexed":false,"name":"against","type":"uint256"},{"indexed":false,"name":"question","type":"string"}],"name":"newQuestionAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"id","type":"uint256"},{"indexed":false,"name":"infavour","type":"uint256"},{"indexed":false,"name":"against","type":"uint256"}],"name":"updatedQuestion","type":"event"}];
 let VotingContract = web3.eth.contract(abi);
@@ -26,7 +29,7 @@ $(document).ready(function () {
                             '        </p>\n' +
                             '        <button class="pollbutton yes" onclick="onClickYes('+i+')">Yes</button>\n' +
                             '        <button class="pollbutton no" onclick="onClickNo('+i+')">No</button>\n' +
-                            '        <button class="pollbutton voted" style="display: none">Your Transaction is Being Mined</button>' +
+                            '        <button class="pollbutton voted" style="display: none">Transaction is Mining (Click Here To See The Progress)</button>' +
                             '        <p class="infavour">Votes For Yes : ' + infavour + '</p>\n' +
                             '        <p class="against">Votes For No : ' + against + '</p>' +
                             '    </section>');
@@ -82,7 +85,7 @@ $(document).ready(function () {
                     '        </p>\n' +
                     '        <button class="pollbutton yes" onclick="onClickYes('+uid+')">Yes</button>\n' +
                     '        <button class="pollbutton no" onclick="onClickNo('+uid+')">No</button>\n' +
-                    '        <button class="pollbutton voted" style="display: none">You Have Already Voted For this Question</button>' +
+                    '        <button href="" class="pollbutton voted" style="display: none">Transaction is Mining (Click Here To See The Progress)</button>' +
                     '        <p class="infavour">Votes For Yes : ' + infavour + '</p>\n' +
                     '        <p class="against">Votes For No : ' + against + '</p>' +
                     '    </section>')
@@ -100,36 +103,48 @@ $(document).ready(function () {
 });
 
 function voteInFavour(uid) {
-    contractInstance.voteInFavour(uid, {from: self, gas: 70000, gasPrice: web3.toWei(40,'gwei')}, function (err) {
+    contractInstance.voteInFavour(uid, {from: self, gas: 70000, gasPrice: web3.toWei(40,'gwei')}, function (err, hash) {
         if(err){
-            alert("You Have Already Voted For this Question");
+            throw err;
+        }else{
+            let etherscan_link = "https://ropsten.etherscan.io/tx/" + hash;
+            console.log(hash);
+            let str = "#" + uid;
+            $(str).children('.yes').css('display', 'none');
+            $(str).children('.no').css('display', 'none');
+            $(str).children('.voted').css('display', 'inline-block');
+            $(str).children('.voted').attr('onclick', "openEtherScan('"+etherscan_link+"')");
         }
     });
 }
 
 function voteAgainst(uid) {
-    contractInstance.voteAgainst(uid, {from: self, gas: 70000, gasPrice: web3.toWei(40,'gwei')}, function (err) {
+    contractInstance.voteAgainst(uid, {from: self, gas: 70000, gasPrice: web3.toWei(40,'gwei')}, function (err, hash) {
         if(err){
             if(err){
-                alert("You Have Already Voted For this Question");
+                throw err;
+            }else{
+                let etherscan_link = "https://ropsten.etherscan.io/tx/" + hash;
+                console.log(hash);
+                let str = "#" + uid;
+                $(str).children('.yes').css('display', 'none');
+                $(str).children('.no').css('display', 'none');
+                $(str).children('.voted').css('display', 'inline-block');
+                $(str).children('.voted').attr('onclick', "openEtherScan('"+etherscan_link+"')");
             }
         }
     });
 }
 
+function openEtherScan(link){
+    window.open(link);
+}
+
 function onClickYes(i) {
-    let str = "#" + i;
-    $(str).children('.yes').css('display', 'none');
-    $(str).children('.no').css('display', 'none');
-    $(str).children('.voted').css('display', 'inline-block');
     voteInFavour(i);
 }
 
 function onClickNo(i) {
-    let str = "#" + i;
-    $(str).children('.yes').css('display', 'none');
-    $(str).children('.no').css('display', 'none');
-    $(str).children('.voted').css('display', 'inline-block');
     voteAgainst(i);
 }
 
