@@ -13,7 +13,7 @@
     font-family: Impact, Charcoal, sans-serif;
 }
 .pollbutton{
-    width: 90px;
+    width: 24%;
     border-radius: 5px;
     background-color: red;
     font-family: Charcoal, sans-serif;
@@ -23,4 +23,8 @@
     margin: 5px;
     text-align: center;
     display: inline-block;
+}
+
+.voted{
+    width: 50%;
 }
