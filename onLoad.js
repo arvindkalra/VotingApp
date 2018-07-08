@@ -121,17 +121,15 @@ function voteInFavour(uid) {
 function voteAgainst(uid) {
     contractInstance.voteAgainst(uid, {from: self, gas: 70000, gasPrice: web3.toWei(40,'gwei')}, function (err, hash) {
         if(err){
-            if(err){
-                throw err;
-            }else{
-                let etherscan_link = "https://ropsten.etherscan.io/tx/" + hash;
-                console.log(hash);
-                let str = "#" + uid;
-                $(str).children('.yes').css('display', 'none');
-                $(str).children('.no').css('display', 'none');
-                $(str).children('.voted').css('display', 'inline-block');
-                $(str).children('.voted').attr('onclick', "openEtherScan('"+etherscan_link+"')");
-            }
+            throw err;
+        }else{
+            let etherscan_link = "https://ropsten.etherscan.io/tx/" + hash;
+            console.log(hash);
+            let str = "#" + uid;
+            $(str).children('.yes').css('display', 'none');
+            $(str).children('.no').css('display', 'none');
+            $(str).children('.voted').css('display', 'inline-block');
+            $(str).children('.voted').attr('onclick', "openEtherScan('"+etherscan_link+"')");
         }
     });
 }
