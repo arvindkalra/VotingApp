@@ -19,8 +19,8 @@
       <file leaf-file-name="onLoad.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/onLoad.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="132" column="9" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
+            <state relative-caret-position="491">
+              <caret line="163" lean-forward="true" selection-start-line="163" selection-end-line="163" />
               <folding>
                 <element signature="n#style#0;n#button#2;n#section#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#button#2;n#section#0;n#!!top" expanded="true" />
@@ -130,12 +130,12 @@
       <workItem from="1530985993150" duration="1419000" />
       <workItem from="1530990265756" duration="1387000" />
       <workItem from="1531048072154" duration="658000" />
-      <workItem from="1531068754248" duration="978000" />
+      <workItem from="1531068754248" duration="6149000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6554000" />
+    <option name="totallyTimeSpent" value="11725000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-11" width="1368" height="780" extended-state="6" />
@@ -247,13 +247,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.js" />
-    <entry file="file://$PROJECT_DIR$/questionBoxCSS.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1248">
@@ -261,10 +254,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/questionBoxCSS.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="521">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/onLoad.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="132" column="9" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
+        <state relative-caret-position="491">
+          <caret line="163" lean-forward="true" selection-start-line="163" selection-end-line="163" />
           <folding>
             <element signature="n#style#0;n#button#2;n#section#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#2;n#section#0;n#!!top" expanded="true" />

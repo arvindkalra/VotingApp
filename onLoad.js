@@ -1,5 +1,5 @@
 // let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-if(web3.eth.accounts.length === 0){
+if(web3.eth.accounts.length == 0){
     alert("Metamask Not Logged In");
 }
 let self = web3.eth.accounts[0];
@@ -34,14 +34,18 @@ $(document).ready(function () {
                             '        <p class="against">Votes For No : ' + against + '</p>' +
                             '    </section>');
                     }else{
+                        let link = localStorage.getItem(JSON.stringify(i));
                         $('.questions').append('<section class="votebox" id="' + i + '">\n' +
                             '        <p class="pollid">Poll ID: ' + i + ' </p>\n' +
                             '        <p class="question">' + question +
                             '        </p>\n' +
-                            '        <button class="pollbutton voted">You Have Already Voted For this Question</button>\n' +
+                            "        <button class='pollbutton voted'>Already Voted (Click Here to See the Block)</button>\n" +
                             '        <p class="infavour">Votes For Yes : ' + infavour + '</p>\n' +
                             '        <p class="against">Votes For No : ' + against + '</p>' +
                             '    </section>');
+
+                        let str = "#" + i;
+                        $(str).children('.voted').attr('onclick', "openEtherScan('"+link+"')");
                     }
                 }
             });
@@ -109,6 +113,7 @@ function voteInFavour(uid) {
         }else{
             let etherscan_link = "https://ropsten.etherscan.io/tx/" + hash;
             console.log(hash);
+            localStorage.setItem(uid, etherscan_link);
             let str = "#" + uid;
             $(str).children('.yes').css('display', 'none');
             $(str).children('.no').css('display', 'none');
@@ -126,6 +131,7 @@ function voteAgainst(uid) {
             let etherscan_link = "https://ropsten.etherscan.io/tx/" + hash;
             console.log(hash);
             let str = "#" + uid;
+            localStorage.setItem(uid, etherscan_link);
             $(str).children('.yes').css('display', 'none');
             $(str).children('.no').css('display', 'none');
             $(str).children('.voted').css('display', 'inline-block');
